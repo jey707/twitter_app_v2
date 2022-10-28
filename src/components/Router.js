@@ -2,7 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Profile from "routes/Profile";
 import Auth from "../routes/Auth";
 import Home from "../routes/Home";
-import Navigation from "./Navigation";
+import Navigation from "components/Navigation";
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
   return (

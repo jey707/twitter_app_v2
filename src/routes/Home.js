@@ -1,7 +1,9 @@
-const Home = ({ isLoggedIn }) => {
+import TweetAdd from "components/TweetAdd";
+
+const Home = ({ userObj }) => {
   return (
     <div>
-      <p>Home!!</p>
+      <TweetAdd userObj={userObj} />
     </div>
   );
 };
