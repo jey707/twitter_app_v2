@@ -6,12 +6,12 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBYkWT55iEWQ0JhHXQM-PJnvArXg_WKhLE",
-  authDomain: "tweet-v2.firebaseapp.com",
-  projectId: "tweet-v2",
-  storageBucket: "tweet-v2.appspot.com",
-  messagingSenderId: "28745406681",
-  appId: "1:28745406681:web:99da388e0037b6f88b86c8",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGIN_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
