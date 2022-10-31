@@ -24,7 +24,7 @@ function App() {
         setIsLoggedIn(true);
         setUserObj({
           displayName: user.displayName,
-          uid: user.displayName,
+          uid: user.uid,
           photoURL: user.photoURL,
           // updateProfile
         });

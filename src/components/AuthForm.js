@@ -1,3 +1,5 @@
+import { dbService } from "fbase";
+import { addDoc, collection } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -45,6 +47,16 @@ const AuthForm = () => {
       }
     }
     console.log("data", data);
+    userProfileImg(data);
+  };
+  const userProfileImg = async (data) => {
+    console.log(data);
+    const userProfile = {
+      userId: data.user.uid,
+      imageURL: "profile.jpg",
+    };
+    //회원가입시
+    await addDoc(collection(dbService, data.user.uid), userProfile);
   };
   const toggleAccount = () => setNewAccount((prev) => !prev);
   return (

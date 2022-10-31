@@ -19,6 +19,8 @@ const TweetAdd = ({ userObj }) => {
         "data_url"
       );
       attachmentUrl = await getDownloadURL(response.ref);
+      console.log("attachmentUrl", attachmentUrl);
+      console.log("response.ref", response.ref);
     }
     const tweetObj = {
       text: tweet,
