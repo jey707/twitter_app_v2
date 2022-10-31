@@ -22,8 +22,8 @@ const AuthForm = () => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
+    let data;
     try {
-      let data;
       const auth = getAuth();
       if (newAccount) {
         data = await createUserWithEmailAndPassword(auth, email, password);
@@ -44,6 +44,7 @@ const AuthForm = () => {
         setError("이메일, 비밀번호를 양식에 맞게 입력해주세요");
       }
     }
+    console.log("data", data);
   };
   const toggleAccount = () => setNewAccount((prev) => !prev);
   return (

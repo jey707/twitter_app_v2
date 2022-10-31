@@ -19,7 +19,7 @@ const Auth = () => {
       provider = new GithubAuthProvider();
     }
     const data = await signInWithPopup(authService, provider);
-    console.log(data);
+    console.log("social", data);
   };
   return (
     <div>
