@@ -1,16 +1,24 @@
 import Tweet from "components/Tweet";
 import TweetAdd from "components/TweetAdd";
 import { dbService } from "fbase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const Home = ({ userObj }) => {
   const [tweets, setTweets] = useState([]);
+
   useEffect(() => {
     const q = query(
       collection(dbService, "tweets"),
       orderBy("createdAt", "desc")
     );
+
     onSnapshot(q, (snapshot) => {
       const tweetArr = snapshot.docs.map((doc) => ({
         id: doc.id,

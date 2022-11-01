@@ -25,17 +25,18 @@ const AuthForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     let data;
+    let firstUser = false;
     try {
       const auth = getAuth();
       if (newAccount) {
         data = await createUserWithEmailAndPassword(auth, email, password);
+        firstUser = true;
       } else {
         data = await signInWithEmailAndPassword(auth, email, password);
+        firstUser = false;
       }
     } catch (error) {
-      console.log(error.message);
       const erMsg = error.message;
-      console.log(erMsg.includes("email-already-in-use"));
       if (erMsg.includes("invalid-email")) {
         setError("유효하지않는 이메일입니다.");
       } else if (erMsg.includes("email-already-in-use")) {
@@ -47,16 +48,17 @@ const AuthForm = () => {
       }
     }
     console.log("data", data);
-    userProfileImg(data);
+    if (firstUser) {
+      userProfileImg(data);
+    }
   };
   const userProfileImg = async (data) => {
-    console.log(data);
     const userProfile = {
       userId: data.user.uid,
       imageURL: "profile.jpg",
     };
     //회원가입시
-    await addDoc(collection(dbService, data.user.uid), userProfile);
+    await addDoc(collection(dbService, "userProfile"), userProfile);
   };
   const toggleAccount = () => setNewAccount((prev) => !prev);
   return (

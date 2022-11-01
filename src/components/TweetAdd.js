@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 const TweetAdd = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [attachment, setAttachment] = useState("");
-
+  const fileInput = useRef();
   const onSubmit = async (e) => {
     e.preventDefault();
     let attachmentUrl = "";
@@ -22,15 +22,19 @@ const TweetAdd = ({ userObj }) => {
       console.log("attachmentUrl", attachmentUrl);
       console.log("response.ref", response.ref);
     }
+
     const tweetObj = {
       text: tweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
+      creatorName: userObj.displayName,
+      creatorImage: userObj.photoURL,
       attachmentUrl,
     };
     await addDoc(collection(dbService, "tweets"), tweetObj);
     setTweet("");
     setAttachment("");
+    fileInput.current.value = null;
   };
   const onChange = (e) => {
     const {
@@ -53,7 +57,7 @@ const TweetAdd = ({ userObj }) => {
     };
     reader.readAsDataURL(theFile);
   };
-  const fileInput = useRef();
+  // const fileInput = useRef();
   const onClearAttachmentClick = () => {
     setAttachment("");
     fileInput.current.value = null;
