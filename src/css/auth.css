@@ -1,0 +1,90 @@
+.auth_sec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.03);
+  height: 100vh;
+}
+.authForm {
+  background-color: white;
+  padding: 50px 0;
+  height: 90%;
+  max-width: 320px;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+}
+.authForm .auth_icon {
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  margin-bottom: 45px;
+}
+.authForm_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.authForm input {
+  font-size: 16px;
+  display: block;
+  width: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  margin-bottom: 10px;
+  padding: 8px 13px;
+}
+
+.authForm input[type="text"]:focus,
+.authForm input[type="password"]:focus {
+  background-color: rgba(4, 170, 255, 0.1);
+  border: none;
+}
+.authForm input[type="submit"] {
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+}
+.authForm_box {
+  margin: 0 15px;
+}
+hr {
+  width: 200px;
+  height: 1px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.authForm_box .toggle_account {
+  font-size: 14.5px;
+  color: rgba(4, 170, 255);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.authForm_box .social_btn {
+  margin-top: 10px;
+}
+.authForm_box .social_btn button {
+  display: block;
+  width: 300px;
+  padding: 6px 13px;
+  font-size: 14px;
+  background-color: white;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.authForm_box .social_btn button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  transition: 0.5s;
+}
+.authForm_box .social_btn button:first-child {
+  margin-bottom: 10px;
+}
+.authForm_box .social_btn button svg {
+  font-size: 18px;
+  margin-right: 8px;
+}
+.authForm_box .error_msg {
+  font-size: 13px;
+  color: red;
+}

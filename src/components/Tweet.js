@@ -8,9 +8,11 @@ import {
 } from "firebase/storage";
 import { useRef, useState } from "react";
 import { v4 } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faImage } from "@fortawesome/free-regular-svg-icons";
 
 const Tweet = ({ tweetObj, isOwner }) => {
-  // console.log(tweetObj);
   const [fileChange, setFileCange] = useState(false);
   const tweetTextRef = doc(dbService, "tweets", `${tweetObj.id}`);
   const [editing, setEditing] = useState(false);
@@ -33,17 +35,11 @@ const Tweet = ({ tweetObj, isOwner }) => {
   const toggleEditing = () => setEditing((prev) => !prev);
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("desertRef", desertRef);
-    console.log("desertRef", !desertRef._location.path_);
     let attachmentUrl = "";
-    console.log("attachment", attachment);
-    console.log("fileChange", fileChange);
     if ((attachment !== "" || !desertRef._location.path_) && fileChange) {
       // if (tweetObj.attachmentUrl !== "") {
-      console.log("이미지드간다");
 
       if (!desertRef._location.path_) {
-        console.log("없다가 새로이미지넣기");
         desertRef = ref(storageService, `${tweetObj.creatorId}/${v4()}`);
       } else {
         await deleteObject(desertRef);
@@ -53,8 +49,6 @@ const Tweet = ({ tweetObj, isOwner }) => {
       // const attachmentRef = ref(storageService, `${userObj.uid}/${v4()}`);
       const response = await uploadString(desertRef, attachment, "data_url");
       attachmentUrl = await getDownloadURL(response.ref);
-      console.log("attachmentUrl", attachmentUrl);
-      console.log("response.ref", response.ref);
     }
     ////////////////db업데이트 부분/////////////////
     if ((attachment !== "" || !desertRef._location.path_) && fileChange) {
@@ -103,11 +97,15 @@ const Tweet = ({ tweetObj, isOwner }) => {
                   required
                 />
                 {/* 수정첨부파일 넣는곳 */}
+                <label htmlFor="edit_file">
+                  <FontAwesomeIcon icon={faImage} />
+                </label>
                 <input
                   type="file"
                   accept="image/*"
                   onChange={onFileChange}
                   ref={fileInput}
+                  id="edit_file"
                 />
                 {attachment && (
                   <div>

@@ -52,6 +52,7 @@ const AuthForm = () => {
       userProfileImg(data);
     }
   };
+
   const userProfileImg = async (data) => {
     const userProfile = {
       userId: data.user.uid,
@@ -81,9 +82,10 @@ const AuthForm = () => {
           required
         />
         <input type="submit" value={newAccount ? "회원가입" : "로그인"} />
-        <p>{error}</p>
+        <p className="error_msg">{error}</p>
       </form>
-      <span onClick={toggleAccount}>
+      <hr className="hr" />
+      <span className="toggle_account" onClick={toggleAccount}>
         {newAccount ? "로그인하기" : "회원가입하기"}
       </span>
     </>

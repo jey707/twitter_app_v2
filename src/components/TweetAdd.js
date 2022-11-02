@@ -3,6 +3,9 @@ import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useState, useRef } from "react";
 import { v4 } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faImage } from "@fortawesome/free-regular-svg-icons";
 
 const TweetAdd = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
@@ -63,27 +66,43 @@ const TweetAdd = ({ userObj }) => {
     fileInput.current.value = null;
   };
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        value={tweet}
-        onChange={onChange}
-        placeholder="트윗을 작성해주세요!!"
-        maxLength={120}
-      />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={onFileChange}
-        ref={fileInput}
-      />
-      <input type="submit" value="Tweet" />
+    <form onSubmit={onSubmit} className="tweet_form">
+      <div className="tweet_form_box">
+        <img
+          src={userObj.photoURL}
+          alt="user prifile"
+          className="writer_profile"
+        />
+        <input
+          type="text"
+          value={tweet}
+          onChange={onChange}
+          placeholder="무슨 일이 일어나고 있나요?"
+          maxLength={120}
+          className="tweet_input"
+        />
+        <label htmlFor="add_file">
+          <FontAwesomeIcon icon={faImage} className="file_icon" />
+        </label>
+        <input
+          className="add_file"
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+          ref={fileInput}
+          id="add_file"
+        />
+      </div>
+
       {attachment && (
-        <div>
-          <img src={attachment} width="50px" height="50px" alt="첨부파일" />
-          <button onClick={onClearAttachmentClick}>❌</button>
+        <div className="attach_box">
+          <img src={attachment} className="attach_img" alt="첨부파일" />
+          <button className="attach_del" onClick={onClearAttachmentClick}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
         </div>
       )}
+      <input type="submit" value="트윗" />
     </form>
   );
 };

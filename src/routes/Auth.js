@@ -13,7 +13,12 @@ import {
 import React from "react";
 import AuthForm from "../components/AuthForm";
 import { authService, dbService } from "../fbase";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faGoogle,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
 const Auth = () => {
   const onSocialClick = async (e) => {
     const {
@@ -42,7 +47,7 @@ const Auth = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      if (profileExist.length == 0) {
+      if (profileExist.length === 0) {
         console.log("user add");
         addDoc(collection(dbService, "userProfile"), socialData);
       } else {
@@ -51,17 +56,27 @@ const Auth = () => {
     });
   };
   return (
-    <div>
-      <AuthForm />
-      <div>
-        <button onClick={onSocialClick} name="google">
-          Google로그인
-        </button>
-        <button onClick={onSocialClick} name="github">
-          Github로그인
-        </button>
+    <section className="auth_sec">
+      <div className="authForm">
+        <div className="auth_icon">
+          <FontAwesomeIcon icon={faTwitter} color={"#04AAFF"} size="2x" />
+          <p>로그인하기</p>
+        </div>
+        <div className="authForm_box">
+          <AuthForm />
+          <div className="social_btn">
+            <button onClick={onSocialClick} name="google">
+              <FontAwesomeIcon icon={faGoogle} />
+              Google로그인
+            </button>
+            <button onClick={onSocialClick} name="github">
+              <FontAwesomeIcon icon={faGithub} />
+              Github로그인
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

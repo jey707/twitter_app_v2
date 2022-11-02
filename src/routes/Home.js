@@ -1,13 +1,7 @@
 import Tweet from "components/Tweet";
 import TweetAdd from "components/TweetAdd";
 import { dbService } from "fbase";
-import {
-  collection,
-  getDoc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const Home = ({ userObj }) => {
@@ -29,7 +23,7 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
+    <section className="tweet_area">
       <TweetAdd userObj={userObj} />
       <div>
         {tweets.map((tweet) => (
@@ -40,7 +34,7 @@ const Home = ({ userObj }) => {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

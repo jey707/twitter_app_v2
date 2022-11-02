@@ -1,0 +1,141 @@
+.route_box {
+  display: flex;
+}
+/** navigation **/
+.menu_bar {
+  position: fixed;
+  /* background-color: burlywood; */
+  height: 100vh;
+  max-width: 15%;
+  padding: 20px 40px 20px 50px;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0, 0, 00, 0.3);
+}
+.menu_bar .home_icon {
+  margin-bottom: 25px;
+}
+.menu_bar .menu_list {
+}
+.menu_bar .menu_list li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+}
+.menu_bar .menu_list li {
+  height: 50px;
+  width: 125px;
+  line-height: 1.9;
+  border-radius: 20px;
+}
+.menu_bar .menu_list li:hover {
+  background-color: rgba(74, 168, 232, 0.3);
+  transition: 0.2s ease-in-out;
+}
+.menu_bar .menu_list li:first-child {
+  margin-bottom: 10px;
+}
+.menu_bar .menu_list li .menu_icon {
+  margin-right: 20px;
+}
+
+.tweet_area {
+  height: 1000px;
+}
+
+.menu_link {
+  color: black;
+}
+.tweet_area {
+  position: relative;
+  left: 200px;
+  padding: 20px 50px;
+  width: 85%;
+}
+.tweet_form {
+  box-shadow: rgba(60, 64, 67, 0.1) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.1) 0px 2px 6px 2px;
+  border-radius: 20px;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 28px;
+}
+.tweet_form_box {
+  display: flex;
+  position: relative;
+}
+.tweet_form .writer_profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.tweet_form .tweet_input {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  padding-right: 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.tweet_form .tweet_input:focus {
+  outline: none;
+}
+.file_icon {
+  position: absolute;
+  top: 10px;
+  bottom: 0;
+  right: 10px;
+  color: darkgray;
+  font-size: 30px;
+  cursor: pointer;
+}
+.add_file {
+  overflow: hidden;
+  display: none;
+}
+
+.attach_box {
+  margin: 12px 0 0 15px;
+  max-width: 240px;
+  max-height: 240px;
+  position: relative;
+}
+.attach_box .attach_img {
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+}
+.attach_box .attach_del {
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  bottom: 8px;
+  right: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.tweet_form input[type="submit"] {
+  margin-top: 12px;
+  background-color: rgb(29, 155, 240);
+  color: #fff;
+  font-size: 1.1rem;
+  width: 120px;
+  height: 35px;
+  border-radius: 15px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  padding-left: 15px;
+  border: none;
+  margin-left: auto;
+}
+.tweet_form input[type="submit"]:hover {
+  background-color: rgb(26, 140, 216);
+  transition: 0.15s ease-in-out;
+}

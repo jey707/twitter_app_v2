@@ -1,20 +1,42 @@
-const { Link } = require("react-router-dom");
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faUser, faHome } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Navigation = ({ userObj = { userObj } }) => {
   return (
-    <nav>
-      <ul>
+    <nav className="menu_bar">
+      <div className="home_icon">
+        <Link to="/">
+          <FontAwesomeIcon icon={faTwitter} size="2x" color={"#04AAFF"} />
+        </Link>{" "}
+      </div>
+      <ul className="menu_list">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" style={{ textDecoration: "none" }} className="menu_link">
+            <div className="menu_icon">
+              <FontAwesomeIcon icon={faHome} />
+            </div>
+            <div>Home</div>
+          </Link>
         </li>
         <li>
-          <img
-            src={userObj.photoURL}
-            alt="프로필 이미지"
-            width="50px"
-            height="50px"
-          />
-          <Link to="/profile">{userObj.displayName}님의 프로필</Link>
+          <Link
+            to="/profile"
+            style={{ textDecoration: "none" }}
+            className="menu_link"
+          >
+            <div className="menu_icon">
+              <FontAwesomeIcon icon={faUser} />
+            </div>
+            {/* <img
+              src={userObj.photoURL}
+              alt="프로필 이미지"
+              width="50px"
+              height="50px"
+            /> */}
+            <div>프로필</div>
+          </Link>
         </li>
       </ul>
     </nav>
