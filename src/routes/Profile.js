@@ -10,6 +10,9 @@ import {
   where,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import "../css/profile.css";
 
 const { useState, useEffect } = require("react");
 
@@ -56,18 +59,29 @@ const Profile = ({ userObj, refreshUser }) => {
     getMyTweets();
   }, []);
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={onChange}
-          type="text"
-          placeholder="계정이름"
-          value={newDisplayName}
-        />
-        <input type="submit" value="프로필 수정" />
+    <section className="tweet_area">
+      <form className="profile" onSubmit={onSubmit}>
+        <div>
+          <img src={userObj.photoURL} loading="lazy" />
+          <input
+            onChange={onChange}
+            type="text"
+            placeholder="계정이름"
+            maxLength={30}
+            value={newDisplayName}
+            required
+          />
+          <input type="submit" value="프로필 수정" />
+        </div>
+        <button onClick={onLogOutClick}>
+          <FontAwesomeIcon icon={faRightFromBracket} />
+          로그아웃
+        </button>
       </form>
-      <button onClick={onLogOutClick}>로그아웃</button>
       <div>
+        <div className="my_tweet">
+          <p>나의 트윗</p>
+        </div>
         {myTweets.map((mytweet) => (
           <Tweet
             key={mytweet.id}
@@ -76,7 +90,7 @@ const Profile = ({ userObj, refreshUser }) => {
           />
         ))}
       </div>
-    </>
+    </section>
   );
 };
 

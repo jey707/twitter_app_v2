@@ -4,15 +4,21 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useState, useRef } from "react";
 import { v4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 
 const TweetAdd = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [attachment, setAttachment] = useState("");
+  const [ovaerlap, setOverlap] = useState(false);
   const fileInput = useRef();
   const onSubmit = async (e) => {
     e.preventDefault();
+    // 중복등록 방지
+    setOverlap((prev) => !prev);
+    if (!ovaerlap) {
+      return;
+    }
     let attachmentUrl = "";
     if (attachment !== "") {
       const attachmentRef = ref(storageService, `${userObj.uid}/${v4()}`);
@@ -38,6 +44,7 @@ const TweetAdd = ({ userObj }) => {
     setTweet("");
     setAttachment("");
     fileInput.current.value = null;
+    setOverlap(false);
   };
   const onChange = (e) => {
     const {
@@ -79,7 +86,8 @@ const TweetAdd = ({ userObj }) => {
           onChange={onChange}
           placeholder="무슨 일이 일어나고 있나요?"
           maxLength={120}
-          className="tweet_input"
+          className="text_input"
+          required
         />
         <label htmlFor="add_file">
           <FontAwesomeIcon icon={faImage} className="file_icon" />

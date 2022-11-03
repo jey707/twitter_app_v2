@@ -19,6 +19,7 @@ import {
   faGoogle,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import "../css/auth.css";
 const Auth = () => {
   const onSocialClick = async (e) => {
     const {

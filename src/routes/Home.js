@@ -3,6 +3,7 @@ import TweetAdd from "components/TweetAdd";
 import { dbService } from "fbase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import "../css/home.css";
 
 const Home = ({ userObj }) => {
   const [tweets, setTweets] = useState([]);

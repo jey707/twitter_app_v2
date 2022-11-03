@@ -18,10 +18,14 @@ const Tweet = ({ tweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTweet] = useState(tweetObj.text);
   const [attachment, setAttachment] = useState(tweetObj.attachmentUrl);
+  const [createdAt, setCreatedAt] = useState(tweetObj.createdAt);
   const fileInput = useRef();
-  // 삭제하려는 이미지 파일 ref생성
+  const date = new Date(tweetObj.createdAt);
+  tweetObj.createdAt =
+    date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate();
+  // 삭제 또는 수정 이미지 파일 ref생성
   let desertRef = ref(storageService, tweetObj.attachmentUrl);
-
+  console.log(new Date(tweetObj.createdAt));
   const onDelete = async () => {
     const ok = window.confirm("해당 트윗을 삭제하시겠습니까?");
     if (ok) {
@@ -37,15 +41,12 @@ const Tweet = ({ tweetObj, isOwner }) => {
     e.preventDefault();
     let attachmentUrl = "";
     if ((attachment !== "" || !desertRef._location.path_) && fileChange) {
-      // if (tweetObj.attachmentUrl !== "") {
-
       if (!desertRef._location.path_) {
         desertRef = ref(storageService, `${tweetObj.creatorId}/${v4()}`);
       } else {
         await deleteObject(desertRef);
       }
 
-      // }
       // const attachmentRef = ref(storageService, `${userObj.uid}/${v4()}`);
       const response = await uploadString(desertRef, attachment, "data_url");
       attachmentUrl = await getDownloadURL(response.ref);
@@ -83,65 +84,88 @@ const Tweet = ({ tweetObj, isOwner }) => {
   };
 
   return (
-    <div key={tweetObj.id}>
+    <div className="tweet_show" key={tweetObj.id}>
       {editing ? (
         <>
           {isOwner && (
             <>
               <form onSubmit={onSubmit}>
-                <input
-                  type="text"
-                  onChange={onChange}
-                  placeholder="트윗을 작성해주세요!!"
-                  value={newTweet}
-                  required
-                />
-                {/* 수정첨부파일 넣는곳 */}
-                <label htmlFor="edit_file">
-                  <FontAwesomeIcon icon={faImage} />
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={onFileChange}
-                  ref={fileInput}
-                  id="edit_file"
-                />
+                <div className="writer">
+                  <img
+                    className="writer_img"
+                    src={tweetObj.creatorImage}
+                    loading="lazy"
+                  />
+                  <input
+                    type="text"
+                    onChange={onChange}
+                    placeholder="트윗을 수정해 주세요."
+                    value={newTweet}
+                    maxLength="120"
+                    required
+                    className="text_input"
+                  />
+                  {/* 수정첨부파일 넣는곳 */}
+                  <label htmlFor="edit_file">
+                    <FontAwesomeIcon icon={faImage} className="file_icon" />
+                  </label>
+                  <input
+                    type="file"
+                    className="add_file"
+                    accept="image/*"
+                    onChange={onFileChange}
+                    ref={fileInput}
+                    id="edit_file"
+                  />
+                </div>
                 {attachment && (
-                  <div>
+                  <div className="tweet_attach_img">
                     <img
                       src={attachment}
                       alt="트윗 첨부이미지"
-                      width="100px"
-                      height="100px"
+                      className="tweet_img"
+                      loading="lazy"
                     />
                   </div>
                 )}
-
-                <input type="submit" value="트윗업데이트" />
-                <button onClick={toggleEditing}>Cancel</button>
+                <div className="edit_btn">
+                  <input type="submit" value="수정" />
+                  <button onClick={toggleEditing}>취소</button>
+                </div>
               </form>
             </>
           )}
         </>
       ) : (
         <>
-          <img src={tweetObj.creatorImage} width="50px" height="50px" />
-          <h4>{tweetObj.text}</h4>
-          {tweetObj.attachmentUrl && (
-            <img
-              src={attachment}
-              alt="트윗 첨부이미지"
-              width="100px"
-              height="100px"
-            />
-          )}
-          {isOwner && (
-            <>
-              <button onClick={toggleEditing}>트윗수정</button>
-              <button onClick={onDelete}>트윗삭제</button>
-            </>
-          )}
+          <div className="writer">
+            <img className="writer_img" src={tweetObj.creatorImage} />
+            <div className="writer_info">
+              <p className="writer_name">{tweetObj.creatorName}</p>
+              <p>{tweetObj.createdAt}</p>
+            </div>
+          </div>
+          <div className="tweet_content">
+            <h4 className="tweet_title">{tweetObj.text}</h4>
+            {tweetObj.attachmentUrl && (
+              <img
+                className="tweet_img"
+                src={attachment}
+                alt="트윗 첨부이미지"
+                loading="lazy"
+              />
+            )}
+            {isOwner && (
+              <div className="tweet_edit">
+                <button onClick={toggleEditing}>
+                  <FontAwesomeIcon icon={faPencilAlt} />
+                </button>
+                <button onClick={onDelete}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>

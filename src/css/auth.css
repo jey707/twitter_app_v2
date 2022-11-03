@@ -4,6 +4,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.03);
   height: 100vh;
+  width: 100%;
 }
 .authForm {
   background-color: white;
