@@ -15,7 +15,6 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import "../css/profile.css";
 
 const { useState, useEffect } = require("react");
-
 const Profile = ({ userObj, refreshUser }) => {
   console.log(userObj);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
@@ -55,6 +54,7 @@ const Profile = ({ userObj, refreshUser }) => {
       setMyTweets(tweetArr);
     });
   };
+
   useEffect(() => {
     getMyTweets();
   }, []);
@@ -71,7 +71,7 @@ const Profile = ({ userObj, refreshUser }) => {
             value={newDisplayName}
             required
           />
-          <input type="submit" value="프로필 수정" />
+          <input type="submit" value="수정" />
         </div>
         <button onClick={onLogOutClick}>
           <FontAwesomeIcon icon={faRightFromBracket} />

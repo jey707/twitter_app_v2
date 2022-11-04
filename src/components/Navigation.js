@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faUser, faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import "../css/navigation.css";
 
 const Navigation = ({ userObj = { userObj } }) => {
   return (
@@ -17,7 +18,7 @@ const Navigation = ({ userObj = { userObj } }) => {
             <div className="menu_icon">
               <FontAwesomeIcon icon={faHome} />
             </div>
-            <div>Home</div>
+            <div className="menu_name">Home</div>
           </Link>
         </li>
         <li>
@@ -35,7 +36,7 @@ const Navigation = ({ userObj = { userObj } }) => {
               width="50px"
               height="50px"
             /> */}
-            <div>프로필</div>
+            <div className="menu_name">프로필</div>
           </Link>
         </li>
       </ul>
