@@ -31,9 +31,7 @@ const Auth = () => {
     } else if (name === "github") {
       provider = new GithubAuthProvider();
     }
-    // console.log("provider", provider);
     const data = await signInWithPopup(authService, provider);
-    // console.log("social", data);
 
     const socialData = {
       imageURL: data.user.photoURL,
@@ -49,10 +47,7 @@ const Auth = () => {
         ...doc.data(),
       }));
       if (profileExist.length === 0) {
-        console.log("user add");
         addDoc(collection(dbService, "userProfile"), socialData);
-      } else {
-        console.log("already user");
       }
     });
   };

@@ -48,7 +48,6 @@ const AuthForm = () => {
         setError("이메일, 비밀번호를 양식에 맞게 입력해주세요");
       }
     }
-    console.log("data", data);
     if (firstUser) {
       userProfileImg(data);
     }

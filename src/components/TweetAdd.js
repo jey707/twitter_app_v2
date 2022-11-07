@@ -10,15 +10,15 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 const TweetAdd = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [attachment, setAttachment] = useState("");
-  const [ovaerlap, setOverlap] = useState(false);
+  const [overlap, setOverlap] = useState(true);
   const fileInput = useRef();
   const onSubmit = async (e) => {
     e.preventDefault();
     // 중복등록 방지
-    setOverlap((prev) => !prev);
-    if (!ovaerlap) {
+    if (!overlap) {
       return;
     }
+    setOverlap(false);
     let attachmentUrl = "";
     if (attachment !== "") {
       const attachmentRef = ref(storageService, `${userObj.uid}/${v4()}`);
@@ -28,8 +28,6 @@ const TweetAdd = ({ userObj }) => {
         "data_url"
       );
       attachmentUrl = await getDownloadURL(response.ref);
-      console.log("attachmentUrl", attachmentUrl);
-      console.log("response.ref", response.ref);
     }
 
     const tweetObj = {
@@ -44,7 +42,7 @@ const TweetAdd = ({ userObj }) => {
     setTweet("");
     setAttachment("");
     fileInput.current.value = null;
-    setOverlap(false);
+    setOverlap(true);
   };
   const onChange = (e) => {
     const {
@@ -56,7 +54,6 @@ const TweetAdd = ({ userObj }) => {
     const {
       target: { files },
     } = e;
-    console.log("file", files);
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (fileEndEvent) => {

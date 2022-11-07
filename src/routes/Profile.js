@@ -16,7 +16,6 @@ import "../css/profile.css";
 
 const { useState, useEffect } = require("react");
 const Profile = ({ userObj, refreshUser }) => {
-  console.log(userObj);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [myTweets, setMyTweets] = useState([]);
   const navigate = useNavigate();

@@ -25,7 +25,6 @@ const Tweet = ({ tweetObj, isOwner }) => {
     date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate();
   // 삭제 또는 수정 이미지 파일 ref생성
   let desertRef = ref(storageService, tweetObj.attachmentUrl);
-  console.log(new Date(tweetObj.createdAt));
   const onDelete = async () => {
     const ok = window.confirm("해당 트윗을 삭제하시겠습니까?");
     if (ok) {

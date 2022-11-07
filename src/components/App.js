@@ -13,7 +13,6 @@ function App() {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      // console.log(user);
       if (user) {
         if (user.displayName === null) {
           user.displayName = "User";
